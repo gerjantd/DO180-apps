@@ -708,3 +708,95 @@
   708  exit
   709  history
   710  history > bashhistory
+  711  vi bashhistory 
+  712  cd DO180-apps/
+  713  git remote -v
+  714  git checkout master
+  715  mv ~/bashhistory .
+  716  l
+  717  ls
+  718  git add bashhistory 
+  719  git commit -m "Add history"
+  720  git push -u origin master
+  721  cd ..
+  722  lab comprehensive-review start
+  723  cd DO180/labs/comprehensive-review/image/
+  724  ./get-nexus-bundle.sh 
+  725  mv ~/Containerfile .
+  726  podman build --layers=false -t nexus .
+  727  cd ..
+  728  l
+  729  ll
+  730  cd deploy/
+  731  cd local/
+  732  ./run-persistent.sh 
+  733  podman ps  --format="{{.ID}} {{.Names}} {{.Image}}"
+  734  podman logs charmin_noether | grep JettyServer
+  735  podman logs charming_noether | grep JettyServer
+  736  curl -v 127.0.0.1:18081/nexus/ 2>&1 | grep -E 'HTTP|<title>'
+  737   GET /nexus/ HTTP/1.1
+  738  curl -v 127.0.0.1:18081/nexus/ 2>&1 | grep -E 'HTTP|<title>'
+  739  podman rm -f charming_noether
+  740  podman login quay.io -u ${RHT_OCP4_QUAY_USER}
+  741  podman login  -u ${RHT_OCP4_QUAY_USER} quay.io
+  742  source /usr/local/etc/ocp4.config 
+  743  cat /usr/local/etc/ocp4.config 
+  744  podman login quay.io -u ${RHT_OCP4_QUAY_USER}
+  745  podman push localhost/nexus:latest  quay.io/${RHT_OCP4_QUAY_USER}/nexus:latest
+  746  cd ..
+  747  ll
+  748  cd deploy/openshift/
+  749  ll
+  750  oc login -u "${RHT_OCP4_DEV_USER}" -p "${RHT_OCP4_DEV_PASSWORD}" "${RHT_OCP4_MASTER_API}"
+  751  oc new-project ${RHT_OCP4_DEV_USER}-review
+  752  oc expose svc nodejs-dev
+  753  export RHT_OCP4_QUAY_USER
+  754  envsubst < resources/nexus-deployment.yaml  | oc create -f -
+  755  oc get pods
+  756  oc expose svc/nexus
+  757  oc get route -o yaml
+  758  echo http://nexus- ${RHT_OCP4_DEV_USER}-review.${RHT_OCP4_WILDCARD_DOMAIN}/nexus/.
+  759  curl http://nexus- ${RHT_OCP4_DEV_USER}-review.${RHT_OCP4_WILDCARD_DOMAIN}/nexus/.
+  760  firefox http://nexus- ${RHT_OCP4_DEV_USER}-review.${RHT_OCP4_WILDCARD_DOMAIN}/nexus/.
+  761  ll
+  762  firefox http://nexus-${RHT_OCP4_DEV_USER}-review.${RHT_OCP4_WILDCARD_DOMAIN}/nexus/.
+  763  oc get pods
+  764  podman push localhost/nexus:latest  quay.io/${RHT_OCP4_QUAY_USER}/nexus:latest
+  765  oc get pods
+  766  oc start-build bc/nexus
+  767  oc logs nexus-556565d946-d2b6x 
+  768  oc get pods
+  769  envsubst < resources/nexus-deployment.yaml  | oc create -f -
+  770  oc get pods
+  771  oc get builds
+  772  oc get bc
+  773  oc delete ${RHT_OCP4_DEV_USER}-review
+  774  oc get projects
+  775  oc delete ${RHT_OCP4_DEV_USER}-review
+  776  oc delete project ${RHT_OCP4_DEV_USER}-review
+  777  oc new-project ${RHT_OCP4_DEV_USER}-review
+  778  oc delete project ${RHT_OCP4_DEV_USER}-review
+  779  oc delete
+  780  oc delete help
+  781  oc delete --help
+  782  ll
+  783  oc get
+  784  oc get pods
+  785  oc get builds
+  786  oc delete project ${RHT_OCP4_DEV_USER}-review
+  787  oc new-project ${RHT_OCP4_DEV_USER}-review
+  788  envsubst < resources/nexus-deployment.yaml  | oc create -f -
+  789  oc get pods
+  790  oc logs nexus-556565d946-mr5wf 
+  791  oc get pods
+  792  oc expose svc/nexus
+  793  oc get route -o yaml
+  794  firefox http://nexus-${RHT_OCP4_DEV_USER}-review.${RHT_OCP4_WILDCARD_DOMAIN}/nexus/.
+  795  cd
+  796  lab comprehensive-review grade
+  797  lab comprehensive-review finish
+  798  ll
+  799  cd DO180-apps/
+  800  ll
+  801  history
+  802  history > bashhistory 
